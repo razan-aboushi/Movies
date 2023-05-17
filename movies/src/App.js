@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import "./App.css";
 
-function App() {
+
+function App() 
+{
   const [movies, setMovies] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [error, setError] = useState(false);
+
+
 
   useEffect(() => {
     // Make a request to your Express server endpoint to retrieve the movies list
@@ -19,33 +24,49 @@ function App() {
       });
   }, []);
 
-  console.log(movies);
-  function handleSearchChange(event) {
+
+
+
+  function handleSearchChange(event) 
+  {
     setSearchTerm(event.target.value);
   }
 
-  function handleMovieClick(movieId) {
+
+
+
+  function handleMovieClick(movieId) 
+  {
     // Make a request to fetch the details of a specific movie
     axios.get(`http://localhost:4000/movies/${movieId}`) // Update the port to match the Express server's port
       .then((response) => {
         setSelectedMovie(response.data);
       })
-      .catch((error) => {
+      .catch((error) => 
+      {
         console.error(error);
       });
   }
 
-  function filterMovies(movie) {
-    if (!searchTerm) {
-      return true; // Show all movies when no genre or search term is selected
+
+
+  function filterMovies(movie)
+   {
+    if (!searchTerm) 
+    {
+      return true; // Show all movies when no search term is selected
     }
     
-    if (searchTerm && movie.title.toLowerCase().includes(searchTerm.toLowerCase())) {
+    if (searchTerm && movie.title.toLowerCase().includes(searchTerm.toLowerCase()))
+     {
       return true;
     }
     return false;
   }
   
+
+
+
   return (
     <div className="container">
       <h1 className="mb-4">Movies</h1>
@@ -63,7 +84,7 @@ function App() {
         />
       </div>
 
-      <ul className="list-group">
+      <ul className="list-group d-flex justify-content-center" style={{textDecoration:"none"}}>
         {movies.length > 0 ? (
           movies.filter(filterMovies).map((movie) => (
             <li

@@ -44,3 +44,4 @@ app.get('/movies/:movieId', (req, res) => {
       res.status(500).json({ error: 'Failed to fetch movie details' });
     });
 });
+
